@@ -8,7 +8,7 @@ export default function Home() {
   const [inputValue, setInputValue] = useState("");
 
   const handleAddTodo = () => {
-    setTodos([...todos, inputValue]);
+    inputValue === "" ? null : setTodos([...todos, inputValue]);
     setInputValue(""); // Clear the input field
   };
 
@@ -17,9 +17,10 @@ export default function Home() {
     setInputValue(e.target.value);
   };
 
-  const handleDelTodo=(i)=>{
-    let newTodos=todos.filter((el)=> el ==! i)
-  }
+  const handleDelTodo = (i) => {
+    let newTodos = todos.filter((el) => el !== i);
+    setTodos(newTodos);
+  };
 
   return (
     <main className="container-fluid">
@@ -44,11 +45,25 @@ export default function Home() {
       </div>
       <ul className="list-group">
         {todos.map((todo, index) => (
-          <><li key={index} className="list-group-item">{todo}</li></>
+          <li
+            key={todo}
+            className="list-group-item  d-flex justify-content-between align-items-center"
+          >
+            {todo}
+            <button
+              className="btn btn-danger"
+              type="button"
+              id="button-addon2"
+              key={index}
+              onClick={() => {
+                handleDelTodo(todo);
+              }}
+            >
+              X
+            </button>
+          </li>
         ))}
-      
       </ul>
     </main>
   );
 }
-
