@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function Home() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const handleAddTodo = () => {
     inputValue === "" ? null : setTodos([...todos, inputValue]);
@@ -20,6 +21,10 @@ export default function Home() {
   const handleDelTodo = (i) => {
     let newTodos = todos.filter((el) => el !== i);
     setTodos(newTodos);
+  };
+
+  const handleDone = (e) => {
+    setIsCompleted(e.target.checked);
   };
 
   return (
@@ -49,7 +54,13 @@ export default function Home() {
             key={todo}
             className="list-group-item  d-flex justify-content-between align-items-center"
           >
-            {todo}
+            <input
+              className="form-check-input"
+              type="checkbox"
+              checked={isCompleted}
+              onChange={handleDone}
+            ></input>
+            <span>{isCompleted ? <del>{todo}</del> : todo}</span>
             <button
               className="btn btn-danger"
               type="button"
