@@ -26,7 +26,6 @@ export default function Home() {
 
   const handleDone = (index) => {
     const updatedTodos = [...todos];
-    console.log(updatedTodos[index].completed);
     updatedTodos[index].completed = !updatedTodos[index].completed;
     setTodos(updatedTodos);
   };
