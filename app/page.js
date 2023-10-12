@@ -7,9 +7,10 @@ export default function Home() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
-
   const handleAddTodo = () => {
-    inputValue === "" ? null : setTodos([...todos, {text:inputValue,completed:false}]);
+    inputValue === ""
+      ? null
+      : setTodos([...todos, { text: inputValue, completed: false }]);
     setInputValue(""); // Clear the input field
   };
 
@@ -25,7 +26,7 @@ export default function Home() {
 
   const handleDone = (index) => {
     const updatedTodos = [...todos];
-    console.log(updatedTodos[index].completed)
+    console.log(updatedTodos[index].completed);
     updatedTodos[index].completed = !updatedTodos[index].completed;
     setTodos(updatedTodos);
   };
@@ -61,7 +62,7 @@ export default function Home() {
               className="form-check-input"
               type="checkbox"
               checked={todo.completed}
-              onChange={()=>handleDone(index)}
+              onChange={() => handleDone(index)}
             ></input>
             <span>{todo.completed ? <del>{todo.text}</del> : todo.text}</span>
             <button
