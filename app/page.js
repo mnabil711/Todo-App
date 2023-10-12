@@ -6,10 +6,10 @@ import { useState } from "react";
 export default function Home() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [isCompleted, setIsCompleted] = useState(false);
+
 
   const handleAddTodo = () => {
-    inputValue === "" ? null : setTodos([...todos, inputValue]);
+    inputValue === "" ? null : setTodos([...todos, {text:inputValue,completed:false}]);
     setInputValue(""); // Clear the input field
   };
 
@@ -23,8 +23,11 @@ export default function Home() {
     setTodos(newTodos);
   };
 
-  const handleDone = (e) => {
-    setIsCompleted(e.target.checked);
+  const handleDone = (index) => {
+    const updatedTodos = [...todos];
+    console.log(updatedTodos[index].completed)
+    updatedTodos[index].completed = !updatedTodos[index].completed;
+    setTodos(updatedTodos);
   };
 
   return (
@@ -57,10 +60,10 @@ export default function Home() {
             <input
               className="form-check-input"
               type="checkbox"
-              checked={isCompleted}
-              onChange={handleDone}
+              checked={todo.completed}
+              onChange={()=>handleDone(index)}
             ></input>
-            <span>{isCompleted ? <del>{todo}</del> : todo}</span>
+            <span>{todo.completed ? <del>{todo.text}</del> : todo.text}</span>
             <button
               className="btn btn-danger"
               type="button"
