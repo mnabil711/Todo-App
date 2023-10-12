@@ -55,7 +55,7 @@ export default function Home() {
       <ul className="list-group">
         {todos.map((todo, index) => (
           <li
-            key={todo}
+            key={todo.text}
             className="list-group-item  d-flex justify-content-between align-items-center"
           >
             <input
